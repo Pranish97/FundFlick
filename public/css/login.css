@@ -1,0 +1,121 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family:  'Poppins';
+}
+
+.image-box img{
+    width: 50%;
+    height: 703px;
+    float: left;
+}
+
+.right-box{
+    width: 50%;
+    height: 703px;
+    float: left;
+}
+
+.right-box img{
+    width: 90px;
+    height: 90px;
+    margin-left: 150px;
+    margin-top: 90px;
+    float: left;
+}
+
+.right-box h3{
+    float: left;
+    margin-top: 90px;
+    margin-left: 20px;
+    font-size: 30px;
+}
+.right-box .welcome{
+    margin-top: 190px;
+    margin-left: 150px;
+    font-size: 20px;
+    color: grey;
+    margin-bottom: 30px;
+}
+.email{
+    margin-top: 40px;
+    margin-left: 150px;
+    font-size: 20px;
+}
+.email-box{
+    width: 450px;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 150px;
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+.password{
+    margin-top: 40px;
+    margin-left: 150px;
+    font-size: 20px;
+}
+.password-box{
+    width: 450px;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 150px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+.forget{
+    text-decoration: none;
+    color: grey;
+    margin-left: 150px;
+    font-size: 20px;
+}
+.forget:hover{
+    color: #00cc00;
+}
+
+input[type=checkbox] {
+    transform: scale(1.5);
+    accent-color:  #00cc00;
+    margin-left: 150px;
+    margin-top: 20px;
+}
+.remember{
+    margin-left: 10px;
+    font-size: 20px;
+}
+.login{
+    margin-top: 30px;
+    margin-left: 45%;
+    width: 106px;
+    height: 43px;
+    background-color:#0a930a;
+    border-radius: 5px;
+    font-size: 18px;
+    border:#0a930a;
+    color: white;
+}
+
+.new{
+    margin-top: 20px;
+    height: 20px;
+    width: 300px;
+    text-decoration: none;
+    color: grey;
+    margin-left:38%;
+    font-size: 20px;
+}
+.register-link{
+    text-decoration: none;
+    color:#0a930a;
+}
+.register-link:hover{
+    color: black;
+}
