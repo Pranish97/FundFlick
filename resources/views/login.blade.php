@@ -21,18 +21,29 @@
         <img src="images/money.png" alt="">
         <h3>Login to <br>Fund Flick</h3>
         <p class="welcome">Welcome Back</p>
-        <form>
-            <label class="email" for="email">Emali Address *</label><br>
-            <input class="email-box" type="text" id="email" name="email"><br><br>
-            <label class="password" for="lname">Password *</label>
-            <input class="password-box" type="password" id="password" name="password"><br>
+        <form action="{{ route('loginUser') }}" enctype="multipart/form-data" method="post">
+            @csrf
+            <div class="mb-2">
+                <label class="email" for="email">Email address *</label><br>
+                <input type="email" class="email-box" id="email" name="email" onclick="changeStyleEmail()" onkeyup="onKeyUpEmail()"><br><br>
+                <div class="error"></div>
+            </div>
+            <div class="mb-2">
+                <label class="password" for="password">Password *</label><br>
+                <input type="password" class="password-box" id="password" name="password" onclick="changeStylePassword()" onkeyup="onKeyUpPassword()"><br><br>
+                <img src="images/closed-eye.png" style="width: 36px; cursor:pointer; position: absolute; top: 47%; transform: translateY(-50%); height:45px; right:11%" id="eye-icon">
+                <div class="error"></div>
+            </div>
             <a class="forget" href="">Forgot Password?</a><br>
-            <input class="checkbox" type="checkbox">
-            <label class="remember">Remember Me</label><br>
-            <input class="login" type="submit" value="Login">
-            <p class="new">New Here?<a class="register-link" href="/register"> Register</a></p><br>
+            <div class="mb-2">
+                <input type="checkbox" class="checkbox" id="remember" name="remember">
+                <label class="remember" for="remember">Remember Me</label><br>
+            </div>
+            <button type="submit" class="login">Login</button>
+            <p class="new">New Here?<a class="register-link" href="/register"> Register</a></p>
         </form>
     </div>
+    <script src="js/login.js"></script>
     @if(Session::has('success'))
     <script>
         toastr.options = {

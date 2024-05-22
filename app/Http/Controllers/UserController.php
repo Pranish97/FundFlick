@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendOtpMail;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -81,5 +82,25 @@ class UserController extends Controller
     public function login()
     {
         return view('login');
+    }
+
+    public function loginUser(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials) && !is_null(Auth::user()->email_verified_at)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/dashboard');
+        }
+
+        return back()->with([
+            'error' => 'The provided credentials are incorrect or your email is not verified.',
+        ])->withInput($request->only('email'));
     }
 }
