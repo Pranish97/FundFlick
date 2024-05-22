@@ -66,7 +66,7 @@ body{
     margin-top: 10px;
     margin-left: 150px;
     border-radius: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     padding-left: 10px;
     font-size: 20px;
 }
@@ -118,4 +118,17 @@ input[type=checkbox] {
 }
 .register-link:hover{
     color: black;
+}
+
+.clicked-style {
+    width: 450px;
+    height: 40px;
+    margin-top: 10px;
+    margin-left: 150px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    padding-left: 10px;
+    font-size: 20px;
+    outline: none;
+    border: 2px solid #0a930a;
 }

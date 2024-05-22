@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -19,5 +20,10 @@ Route::controller(UserController::class)->group(function () {
     Route::post('add/user', 'storeUser')->name('storeUser');
     Route::get('otp/email/{email}', 'showOTPVerificationForm')->name('otp');
     Route::post('/otp/verify/email/{email}', 'verifyOTP')->name('otp.verify');
-    Route::get('/login', 'login');
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login/user', 'loginUser')->name('loginUser');
+});
+
+Route::controller(DashboardController::class)->group(function () {
+    Route::get('/dashboard', 'dashboard')->name('dashboard');
 });
