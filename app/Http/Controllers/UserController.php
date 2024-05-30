@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendOtpMail;
 use App\Models\User;
+use App\Models\Fund;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -38,7 +39,15 @@ class UserController extends Controller
             'password' => bcrypt($request->password),
             'country_code' => $request->country_code,
             'phone_number' => $request->phone_number,
+            'user_amount' => 0.00,
             'otp' => $otp,
+        ]);
+
+        Fund::create([
+            'user_id' => $user->id,
+            'amount' => 0.00,
+            'amount_updated_time' => now(),
+            'updated_user_amount' => 0.00,
         ]);
 
         $data = [

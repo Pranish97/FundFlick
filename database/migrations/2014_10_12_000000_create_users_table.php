@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('country_code');
             $table->string('phone_number');
-            $table->string('amount')->nullable();
+            $table->decimal('user_amount', 8, 2);
             $table->string('otp')->nullable();
             $table->rememberToken();
             $table->timestamps();

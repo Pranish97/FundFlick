@@ -24,6 +24,7 @@ class User extends Authenticatable
         'country_code',
         'phone_number',
         'otp',
+        'user_amount',
     ];
 
     /**
@@ -44,4 +45,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function funds()
+    {
+        return $this->hasMany(Fund::class);
+    }
 }
