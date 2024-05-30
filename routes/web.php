@@ -26,4 +26,5 @@ Route::controller(UserController::class)->group(function () {
 
 Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard', 'dashboard')->name('dashboard');
+    Route::post('/transfer',  'transfer')->name('transfer.perform');
 });
