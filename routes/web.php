@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -27,4 +28,9 @@ Route::controller(UserController::class)->group(function () {
 Route::controller(DashboardController::class)->group(function () {
     Route::get('/dashboard', 'dashboard')->name('dashboard');
     Route::post('/transfer',  'transfer')->name('transfer.perform');
+});
+
+Route::controller(NotificationController::class)->group(function () {
+    Route::get('/notification', 'notification')->name('notification');
+    Route::post('/notifications/markAsRead', 'markAsRead')->name('notifications.markAsRead');
 });
