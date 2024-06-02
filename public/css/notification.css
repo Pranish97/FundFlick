@@ -149,10 +149,11 @@ header .image-text .header-text{
     height: 100%;
     float: left;
     overflow-y: auto;
+    align-items: center;
 }
 
 .container h1{
-    margin-left: 280px;
+    margin-left: 300px;
     margin-top: 30px;
 }
 
@@ -162,6 +163,14 @@ header .image-text .header-text{
     margin-top: 5px;
     color: grey;
     margin-bottom: 10px;
+}
+
+.container table{
+    margin-left: 220px;
+}
+
+.container table th{
+    font-size: 25px;
 }
 
 .transaction-box{
@@ -180,7 +189,6 @@ table {
     border: none;
     margin-left: 155px;
     margin-top: 10px;
-    margin-bottom: 20px;
 }
 th{
     margin-left: 30px;
@@ -322,14 +330,4 @@ th {
     border: var(--navbar-color);
     color: white;
     cursor: pointer;
-}
-
-.badge-pill {
-    border-radius: 10rem;
-    padding: 0.3em 0.6em;
-}
-
-.badge-danger {
-    background-color: #dc3545;
-    color: white;
 }

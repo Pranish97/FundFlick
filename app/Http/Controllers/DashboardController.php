@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Fund;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Notifications\NewNotification;
+use App\Events\TransactionEvent;
 
 class DashboardController extends Controller
 {
@@ -74,6 +76,7 @@ class DashboardController extends Controller
                 'updated_user_amount' => $recipient->user_amount,
                 'receiver_id' => $sender->id,
             ]);
+            event(new TransactionEvent($sender, $recipient, $request->amount, $request->remarks));
         });
 
         return back()->with('success', 'Transfer completed successfully.');

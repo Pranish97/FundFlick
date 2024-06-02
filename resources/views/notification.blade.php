@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     </script>
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/notification.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Welcome to FundFlick</title>
@@ -49,16 +49,8 @@
                         <a href="/notification">
                             <i class='bx bx-bell icon'></i>
                             <span class="text nav-text">Notification</span>
-                            @php
-                            $unreadCount = auth()->user()->unreadNotifications->count();
-                            @endphp
-                            @if($unreadCount > 0)
-                            <span class="badge badge-pill badge-danger">{{ $unreadCount }}</span>
-                            @endif
                         </a>
                     </li>
-
-
 
                     <li class="nav-link">
                         @if(auth()->check() && auth()->user()->role == 'Admin')
@@ -94,41 +86,44 @@
         </div>
     </nav>
     <div class="container">
-        <h1>Welcome Back!</h1>
-        <p>Check Your Account latest updated here</p>
-        <div style="width:870px; margin-left:260px; height:500px;">
-            <canvas id="areaChart"></canvas>
-        </div>
-        <div class="transaction-box">
-            <h2>Recent Transaction</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Last Transaction</th>
-                        <th>Time</th>
-                        <th>Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($funds as $fund)
-                    <tr>
-                        <td><b>{{ $fund->receiver ? $fund->receiver->name : 'N/A' }}</b><br><br>
-                            {{$fund['remarks']}}
-                        </td>
-                        <td>{{$fund['amount_updated_time']}}</td>
-                        <td>@if ($fund['amount_type'] === 'credited')
-                            +
+        <h1>Notifications</h1>
+        @if (auth()->user()->notifications->isEmpty())
+        <p>No notifications.</p>
+        @else
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Message</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (auth()->user()->notifications as $notification)
+                <tr class="notification-row" data-toggle="modal" data-target="#notificationModal" data-message="@if ($notification->data['type'] === 'debited')
+                            Your account has been debited with {{ $notification->data['amount'] }} by
+                            {{ $notification->data['other_user'] }}. Remarks: {{ $notification->data['remarks'] }}
                             @else
-                            -
-                            @endif
-                            <b>MRP</b> {{ $fund['amount'] }}
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+                            Your account has been credited with {{ $notification->data['amount'] }} by
+                            {{ $notification->data['other_user'] }}. Remarks: {{ $notification->data['remarks'] }}
+                            @endif" data-date="{{ $notification->created_at->format('d/m/Y') }}">
+                    <td>
+                        @if ($notification->data['type'] === 'debited')
+                        Your account has been debited with {{ $notification->data['amount'] }} by
+                        {{ $notification->data['other_user'] }}. Remarks: {{ $notification->data['remarks'] }}
+                        @else
+                        Your account has been credited with {{ $notification->data['amount'] }} by
+                        {{ $notification->data['other_user'] }}. Remarks: {{ $notification->data['remarks'] }}
+                        @endif
+                    </td>
+                    <td>{{ $notification->created_at->format('d/m/Y') }}</td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+        @endif
+
     </div>
+
 
     <div class="left-box">
         <p>Hello, {{ $users->name }}!</p>
@@ -160,98 +155,13 @@
             </form>
         </div>
     </div>
-    </div>
-    @if(Session::has('success'))
-    <script>
-        toastr.options = {
-            "progressBar": true,
-            "closeButton": true,
-        }
-        toastr.success("{{ session('success') }}")
-    </script>
-    @endif
-
-    @if(Session::has('amount'))
-    <script>
-        toastr.options = {
-            "progressBar": true,
-            "closeButton": true,
-        }
-        toastr.error("{{ session('amount') }}")
-    </script>
-    @endif
-
-    <script>
-        function toggleVisibility(id) {
-            const amountElement = document.getElementById('amount-text-' + id);
-            const eyeIcon = document.getElementById('eye-icon-' + id);
-            const actualAmount = amountElement.getAttribute('data-amount');
-            if (amountElement.textContent.trim() === 'XXX') {
-                amountElement.textContent = actualAmount;
-                eyeIcon.src = 'images/eye-open.png';
-            } else {
-                amountElement.textContent = 'XXX';
-                eyeIcon.src = 'images/cross-eye.png';
-            }
-        }
-
-        function changeStyleUser() {
-            var usernameInput = document.getElementById('name');
-            usernameInput.classList.add('clicked-style');
-        }
-
-        function onKeyUpUser() {
-            var usernameInput = document.getElementById('name');
-            usernameInput.classList.add('clicked-style');
-        }
-
-        function changeStyleAmount() {
-            var amountInput = document.getElementById('amount-box');
-            amountInput.classList.add('clicked-style');
-        }
-
-        function onKeyUpAmount() {
-            var amountInput = document.getElementById('amount-box');
-            amountInput.classList.add('clicked-style');
-        }
-
-        function changeStyleRemarks() {
-            var remarkInput = document.getElementById('remarks');
-            remarkInput.classList.add('clicked-style');
-        }
-
-        function onKeyUpRemarks() {
-            var remarkInput = document.getElementById('remarks');
-            remarkInput.classList.add('clicked-style');
-        }
 
 
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-        // Graph
-        var ctx = document.getElementById('areaChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: @json($data['data']),
-                datasets: [{
-                    label: 'User Amounts',
-                    data: @json($data['labels']),
-                    backgroundColor: 'rgba(199, 151, 202, 0.4)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    fill: true
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
 </body>
 
 </html>
