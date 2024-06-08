@@ -40,9 +40,9 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="/football">
-                            <i class='bx bx-transfer-alt icon'></i>
-                            <span class="text nav-text">Transaction</span>
+                        <a href="/load">
+                            <i class='bx bx-wallet-alt icon'></i>
+                            <span class="text nav-text">Load Fund</span>
                         </a>
                     </li>
                     <li class="nav-link">

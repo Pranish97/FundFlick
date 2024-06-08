@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendOtpMail;
+use App\Mail\SendToMail;
 use App\Models\User;
 use App\Models\Fund;
+use App\Models\Bank;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -79,7 +81,31 @@ class UserController extends Controller
                 $user->otp = null;
                 $user->save();
 
-                return redirect('/login')->with('success', 'Email verified successfully. You can now login.');
+
+                $user_id = rand(10000, 99999);
+
+                $pin = rand(1000, 9999);
+
+
+                $bank = Bank::create([
+                    'user_id' => $user_id,
+                    'bank_name' => 'Siddhartha Bank',
+                    'amount' => 5000.00,
+                    'pin' => $pin,
+                ]);
+
+                $data = [
+                    'subject' => 'FundFlick - OTP',
+                    'body' => "<p>Your bank details is 
+                    ID: $user_id,
+                    Bank Name: $bank->bank_name,
+                    Pin: $pin,
+                    </p>"
+                ];
+
+                Mail::to($request->email)->send(new SendToMail($data));
+
+                return redirect('/login')->with('success', 'Email verified successfully. You can now login and we have send your bank details on your mail.');
             }
         } else {
             return back()->with(['otp' => 'User not found or invalid email.']);
