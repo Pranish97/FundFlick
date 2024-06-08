@@ -31,15 +31,4 @@ class NotificationController extends Controller
 
         return view('notification', compact('data', 'users', 'funds'));
     }
-
-    public function markAsRead(Request $request)
-    {
-        $notification = auth()->user()->notifications()->findOrFail($request->id);
-
-        if ($notification->read_at === null) {
-            $notification->markAsRead();
-        }
-
-        return response()->json(['status' => 'success']);
-    }
 }
