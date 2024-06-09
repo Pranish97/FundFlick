@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoadController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -36,6 +37,12 @@ Route::controller(NotificationController::class)->group(function () {
 });
 
 Route::controller(LoadController::class)->group(function () {
-    Route::get('/load', 'load')->name('load');
+    Route::get('/load', 'load');
     Route::post('/load/amount', 'loadFromBank')->name('loadFromBank');
+});
+
+Route::controller(ProfileController::class)->group(function () {
+    Route::get('/profile', 'profile');
+    Route::get('/profile/edit', 'editProfile');
+    Route::post('/profile/update', 'updateProfile')->name('profile.update');
 });

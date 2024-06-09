@@ -71,7 +71,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/profile">
+                    <a href="/settings">
                         <i class='bx bx-cog icon'></i>
                         <span class="text nav-text">Settings</span>
                     </a>
