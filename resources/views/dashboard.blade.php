@@ -79,7 +79,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="/profile">
+                    <a href="/settings">
                         <i class='bx bx-cog icon'></i>
                         <span class="text nav-text">Settings</span>
                     </a>
@@ -134,8 +134,10 @@
         <p>Hello, {{ $users->name }}!</p>
         <div class="amount">
             <img src="images/nepal.png" class="nepal">
-            <span id="amount-text-{{ $users->id }}" data-amount="{{ $users->user_amount }}">{{ $users->user_amount }}</span>
-            <img src="images/eye-open.png" class="eye-icon" id="eye-icon-{{ $users->id }}" onclick="toggleVisibility({{ $users->id }})">
+            <span id="amount-text-{{ $users->id }}"
+                data-amount="{{ $users->user_amount }}">{{ $users->user_amount }}</span>
+            <img src="images/eye-open.png" class="eye-icon" id="eye-icon-{{ $users->id }}"
+                onclick="toggleVisibility({{ $users->id }})">
         </div>
         <div class="quick-transfer">
             <h2>Quick Transfer</h2>
@@ -143,17 +145,20 @@
                 @csrf
                 <div class="mb-2">
                     <label class="userText">Username </label>
-                    <input type="text" id="name" class="username" name="name" onclick="changeStyleUser()" onkeyup="onKeyUpUser()" />
+                    <input type="text" id="name" class="username" name="name" onclick="changeStyleUser()"
+                        onkeyup="onKeyUpUser()" />
                     <div class="error"></div>
                 </div>
                 <div class="mb-2">
                     <label class="amountText">Amount </label>
-                    <input type="text" id="amount-box" class="amount-box" name="amount" onclick="changeStyleAmount()" onkeyup="onKeyUpAmount()" value="0.00" />
+                    <input type="text" id="amount-box" class="amount-box" name="amount" onclick="changeStyleAmount()"
+                        onkeyup="onKeyUpAmount()" value="0.00" />
                     <div class="error"></div>
                 </div>
                 <div class="mb-2">
                     <label class="remarkText">Remarks</label>
-                    <input type="text" id="remarks" class="remarks" name="remarks" onclick="changeStyleRemarks()" onkeyup="onKeyUpRemarks()" />
+                    <input type="text" id="remarks" class="remarks" name="remarks" onclick="changeStyleRemarks()"
+                        onkeyup="onKeyUpRemarks()" />
                     <div class="error"></div>
                 </div>
                 <button type="submit" class="send">Send Money</button>
@@ -163,94 +168,94 @@
     </div>
     @if(Session::has('success'))
     <script>
-        toastr.options = {
-            "progressBar": true,
-            "closeButton": true,
-        }
-        toastr.success("{{ session('success') }}")
+    toastr.options = {
+        "progressBar": true,
+        "closeButton": true,
+    }
+    toastr.success("{{ session('success') }}")
     </script>
     @endif
 
     @if(Session::has('amount'))
     <script>
-        toastr.options = {
-            "progressBar": true,
-            "closeButton": true,
-        }
-        toastr.error("{{ session('amount') }}")
+    toastr.options = {
+        "progressBar": true,
+        "closeButton": true,
+    }
+    toastr.error("{{ session('amount') }}")
     </script>
     @endif
 
     <script>
-        function toggleVisibility(id) {
-            const amountElement = document.getElementById('amount-text-' + id);
-            const eyeIcon = document.getElementById('eye-icon-' + id);
-            const actualAmount = amountElement.getAttribute('data-amount');
-            if (amountElement.textContent.trim() === 'XXX') {
-                amountElement.textContent = actualAmount;
-                eyeIcon.src = 'images/eye-open.png';
-            } else {
-                amountElement.textContent = 'XXX';
-                eyeIcon.src = 'images/cross-eye.png';
-            }
+    function toggleVisibility(id) {
+        const amountElement = document.getElementById('amount-text-' + id);
+        const eyeIcon = document.getElementById('eye-icon-' + id);
+        const actualAmount = amountElement.getAttribute('data-amount');
+        if (amountElement.textContent.trim() === 'XXX') {
+            amountElement.textContent = actualAmount;
+            eyeIcon.src = 'images/eye-open.png';
+        } else {
+            amountElement.textContent = 'XXX';
+            eyeIcon.src = 'images/cross-eye.png';
         }
+    }
 
-        function changeStyleUser() {
-            var usernameInput = document.getElementById('name');
-            usernameInput.classList.add('clicked-style');
-        }
+    function changeStyleUser() {
+        var usernameInput = document.getElementById('name');
+        usernameInput.classList.add('clicked-style');
+    }
 
-        function onKeyUpUser() {
-            var usernameInput = document.getElementById('name');
-            usernameInput.classList.add('clicked-style');
-        }
+    function onKeyUpUser() {
+        var usernameInput = document.getElementById('name');
+        usernameInput.classList.add('clicked-style');
+    }
 
-        function changeStyleAmount() {
-            var amountInput = document.getElementById('amount-box');
-            amountInput.classList.add('clicked-style');
-        }
+    function changeStyleAmount() {
+        var amountInput = document.getElementById('amount-box');
+        amountInput.classList.add('clicked-style');
+    }
 
-        function onKeyUpAmount() {
-            var amountInput = document.getElementById('amount-box');
-            amountInput.classList.add('clicked-style');
-        }
+    function onKeyUpAmount() {
+        var amountInput = document.getElementById('amount-box');
+        amountInput.classList.add('clicked-style');
+    }
 
-        function changeStyleRemarks() {
-            var remarkInput = document.getElementById('remarks');
-            remarkInput.classList.add('clicked-style');
-        }
+    function changeStyleRemarks() {
+        var remarkInput = document.getElementById('remarks');
+        remarkInput.classList.add('clicked-style');
+    }
 
-        function onKeyUpRemarks() {
-            var remarkInput = document.getElementById('remarks');
-            remarkInput.classList.add('clicked-style');
-        }
-
-
+    function onKeyUpRemarks() {
+        var remarkInput = document.getElementById('remarks');
+        remarkInput.classList.add('clicked-style');
+    }
 
 
-        // Graph
-        var ctx = document.getElementById('areaChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: @json($data['data']),
-                datasets: [{
-                    label: 'User Amounts',
-                    data: @json($data['labels']),
-                    backgroundColor: 'rgba(199, 151, 202, 0.4)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1,
-                    fill: true
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+
+
+    // Graph
+    var ctx = document.getElementById('areaChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: @json($data['data']),
+            datasets: [{
+                label: 'User Amounts',
+                data: @json($data['labels']),
+                backgroundColor: 'rgba(199, 151, 202, 0.4)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1,
+                fill: true
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
-        });
+        }
+    });
     </script>
 </body>
 

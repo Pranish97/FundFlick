@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;1,100;1,200;1,300;1,400;1,600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+}
+
+
+:root{
+    --body-color:#000000;
+    --navbar-color: #360b70;
+    --primary-color:    #5be75b;;
+    --primary-color-light:#1a0579;
+    --toggle-color:#DDD;
+    --text-color: rgb(255, 255, 255);
+
+    --tran-03: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.4s ease;
+}
+
+body{
+    height: 100vh;
+    background-color: var(--body-color);
+}
+
+
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    float: left;
+    padding: 10px 14px;
+    background-color: var(--navbar-color);
+    float: left;
+}
+
+.navbar .header-text{
+    font-size: 27px;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-top: 8px;
+}
+
+.navbar .nav-text{
+    font-size: 19px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.navbar .image{
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar li{
+    height: 50px;
+    margin-top: 10px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.navbar li .icon{
+    display: flex;
+    min-width: 40px;
+    font-size: 20px;
+    text-align: center;
+    justify-content: center;
+   
+}
+
+.navbar li .icon,
+.navbar li .text{
+    color: var(--text-color);
+    transition: var(--tran-02);
+    float: left;
+    padding-top:14px;
+    margin-left: 15px;
+}
+
+.navbar header{
+    position: relative;
+}
+
+.navbar .image-text img{
+    width: 40px;
+    border-radius: 6px;
+}
+
+.navbar header .image-text{
+    display: flex;
+    align-items: center;
+}
+
+header .image-text .header-text{
+    display: flex;
+    flex-direction: column;
+}
+
+.header-text .name{
+    font-weight: 600;
+}
+
+
+
+
+.navbar .menu-text{
+    margin-left: 20px;
+    color: grey;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 550;
+}
+
+.navbar li a{
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: var(--tran-04);
+}
+
+.navbar li a:hover{
+    background-color: var(--primary-color);
+}
+
+.navbar li a:hover .icon,
+.navbar li a:hover .text{
+    color:var(--body-color);;
+    
+}
+
+.navbar .bottom-content{
+    margin-top: 180px;
+}
+
+.container{
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    float: left;
+    overflow-y: auto;
+}
+
+.container .image{
+    margin-left: 730px;
+    height: 360px;
+    width: 300px;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+}
+
+.container .image img{
+    height: 250px;
+    width: 250px;
+    margin-top: 20px;
+    border: 1px solid black;
+    border-radius: 190px;
+}
+
+.container .image p{
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+
+.container .user-info{
+    margin-left: 420px;
+    width: 900px;
+    height: 350px;
+    margin-top: 40px;
+    border: 1.5px solid black;
+    padding-top: 20px;
+}
+
+.container .user-info .edit{
+    text-align: center;
+}
+
+.container .user-info .name{
+    font-size: 20px;
+    font-weight: 600;
+    width: 100px;
+    margin-left: 20px;
+    margin-top: 50px;
+    float: left;
+}
+
+.container .user-info .user_name{
+    font-size: 20px;
+    float: left;
+    width: 200px;
+    margin-left: 30px;
+    height: 40px;
+    margin-top: 45px;
+    padding-left: 10px;
+}
+
+.container .user-info .email{
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 120px;
+    float: left;
+    margin-top: 50px;
+}
+
+.container .user-info .user_email{
+    font-size: 20px;
+    float: left;
+    width: 300px;
+    height: 40px;
+    margin-left: 30px;
+    margin-top: 45px;
+    padding-left: 10px;
+}
+
+.container .user-info .phone{
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 20px;
+    margin-top: 50px;
+    float: left;
+}
+
+.container .user-info .user_phone{
+    font-size: 20px;
+    padding-left: 10px;
+    float: left;
+    width: 200px;
+    height: 40px;
+    margin-left: 30px;
+    margin-top: 45px;
+}
+
+.container .user-info .update{
+    width: 100px;
+    height: 45px;
+    font-size: 20px;
+    margin-left: 720px;
+    margin-top: 55px;
+    background-color: var(--primary-color);
+    border: 1px solid black;
+}
+
+.container .user-info .update:hover{
+    background-color: green;
+    color: white;
+}
